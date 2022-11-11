@@ -1,8 +1,8 @@
 === WP Currency Exchange Rates ===
-Contributors: algoritmika, anbinder
+Contributors: wpcodefactory, algoritmika, anbinder
 Tags: currency exchange rates, currency, exchange rates
 Requires at least: 4.4
-Tested up to: 5.3
+Tested up to: 6.1
 Stable tag: 1.1.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -31,6 +31,11 @@ Exchange rates are updated via [Fixer.io API](https://fixer.io/terms). Please no
 2. Activate the plugin through the "Plugins" menu in WordPress.
 
 == Changelog ==
+
+= 1.2.0 - 11/11/2022 =
+* Tested up to: 6.1.
+* Readme.txt updated.
+* Deploy script added.
 
 = 1.1.0 - 05/03/2020 =
 * Fix - Default "Exchange Rates Server" value fixed (was `yahoo`).
