@@ -2,12 +2,13 @@
 /**
  * Currency Exchange Rates - Admin Settings Class
  *
- * @version 1.1.0
+ * @version 1.2.0
  * @since   1.0.0
+ *
  * @author  Algoritmika Ltd.
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Alg_Currency_Exchange_Rates_Admin_Settings' ) ) :
 
@@ -84,7 +85,7 @@ class Alg_Currency_Exchange_Rates_Admin_Settings {
 	/**
 	 * handle_actions.
 	 *
-	 * @version 1.0.0
+	 * @version 1.2.0
 	 * @since   1.0.0
 	 */
 	function handle_actions() {
@@ -106,7 +107,7 @@ class Alg_Currency_Exchange_Rates_Admin_Settings {
 		}
 		if ( isset( $_POST['alg_cer_update_rates'] ) ) {
 			do_action( 'alg_cer_update_exchange_rates' );
-			add_action( 'admin_notices', array( $this, 'admin_notice_rates_deleted' ) );
+			add_action( 'admin_notices', array( $this, 'admin_notice_rates_updated' ) );
 		}
 	}
 

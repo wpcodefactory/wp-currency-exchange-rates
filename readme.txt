@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder
 Tags: currency exchange rates, currency, exchange rates
 Requires at least: 4.4
 Tested up to: 6.1
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -13,6 +13,8 @@ Currency exchange rates for WordPress.
 
 **WP Currency Exchange Rates** plugin lets you display currency exchange rates on your site.
 
+### &#9989; Main Features ###
+
 Rates can be displayed with:
 
 * "Currency Exchange Rates" **widget**,
@@ -21,7 +23,7 @@ Rates can be displayed with:
 
 Exchange rates are updated via [Fixer.io API](https://fixer.io/terms). Please note that you will have to get your free API key from [Fixer.io](https://fixer.io/product).
 
-= Feedback =
+### &#128472; Feedback ###
 
 * We are open to your suggestions and feedback. Thank you for using or trying out one of our plugins!
 
@@ -32,7 +34,11 @@ Exchange rates are updated via [Fixer.io API](https://fixer.io/terms). Please no
 
 == Changelog ==
 
-= 1.2.0 - 11/11/2022 =
+= 1.2.0 - 23/12/2022 =
+* Fix - Admin "Update rates now" button message fixed.
+* Dev - Localisation - `load_plugin_textdomain()` function moved to the `init` action.
+* Dev - Plugin is initialized on `plugins_loaded` now.
+* Dev - Code refactoring.
 * Tested up to: 6.1.
 * Readme.txt updated.
 * Deploy script added.

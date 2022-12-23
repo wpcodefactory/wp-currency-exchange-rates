@@ -4,6 +4,7 @@
  *
  * @version 1.1.0
  * @since   1.0.0
+ *
  * @author  Algoritmika Ltd.
  */
 
@@ -32,6 +33,7 @@ class Alg_Currency_Exchange_Rates_WP_Widget extends WP_Widget {
 	 *
 	 * @version 1.1.0
 	 * @since   1.0.0
+	 *
 	 * @param   array $args
 	 * @param   array $instance
 	 */
@@ -61,8 +63,9 @@ class Alg_Currency_Exchange_Rates_WP_Widget extends WP_Widget {
 	 *
 	 * @version 1.1.0
 	 * @since   1.0.0
-	 * @todo    [dev] (maybe) more styling options (table/simple; class/style; labels)
-	 * @todo    [dev] (maybe) option to get saved (i.e. not live) rates
+	 *
+	 * @todo    [maybe] (dev) more styling options (table/simple; class/style; labels)
+	 * @todo    [maybe] (dev) option to get saved (i.e. not live) rates
 	 */
 	function get_widget_option_fields() {
 		return array(
@@ -92,6 +95,7 @@ class Alg_Currency_Exchange_Rates_WP_Widget extends WP_Widget {
 	 *
 	 * @version 1.0.0
 	 * @since   1.0.0
+	 *
 	 * @param   array $instance The widget options
 	 */
 	function form( $instance ) {
@@ -125,6 +129,7 @@ class Alg_Currency_Exchange_Rates_WP_Widget extends WP_Widget {
 	 *
 	 * @version 1.0.0
 	 * @since   1.0.0
+	 *
 	 * @param   array $new_instance The new options
 	 * @param   array $old_instance The previous options
 	 */
@@ -151,4 +156,5 @@ if ( ! function_exists( 'register_alg_currency_exchange_rates_wp_widget' ) ) {
 		register_widget( 'Alg_Currency_Exchange_Rates_WP_Widget' );
 	}
 }
+
 add_action( 'widgets_init', 'register_alg_currency_exchange_rates_wp_widget' );

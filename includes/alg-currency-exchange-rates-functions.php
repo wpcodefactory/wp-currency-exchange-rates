@@ -4,10 +4,11 @@
  *
  * @version 1.1.0
  * @since   1.0.0
+ *
  * @author  Algoritmika Ltd.
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
 if ( ! function_exists( 'alg_cer_get_saved_exchange_rate' ) ) {
 	/**
@@ -49,9 +50,10 @@ if ( ! function_exists( 'alg_cer_get_exchange_rate' ) ) {
 	 *
 	 * @version 1.1.0
 	 * @since   1.0.0
-	 * @todo    [dev] (maybe) calculate by invert
-	 * @todo    [dev] (maybe) offsets
-	 * @todo    [dev] (maybe) rounding (up/down)
+	 *
+	 * @todo    [maybe] (dev) calculate by invert
+	 * @todo    [maybe] (dev) offsets
+	 * @todo    [maybe] (dev) rounding (up/down)
 	 */
 	function alg_cer_get_exchange_rate( $currency_from, $currency_to, $max_precision = 6 ) {
 		$exchange_rates_server = get_option( 'alg_cer_server', 'fixer' );
@@ -71,7 +73,8 @@ if ( ! function_exists( 'alg_cer_download_url' ) ) {
 	 *
 	 * @version 1.0.0
 	 * @since   1.0.0
-	 * @todo    [dev] (maybe) use `download_url()` function
+	 *
+	 * @todo    [maybe] (dev) use `download_url()` function
 	 */
 	function alg_cer_download_url( $url ) {
 		$response = false;
@@ -93,7 +96,8 @@ if ( ! function_exists( 'alg_cer_fixer_get_exchange_rate' ) ) {
 	 *
 	 * @version 1.1.0
 	 * @since   1.0.0
-	 * @todo    [dev] get all rates at once (for "saved rates")
+	 *
+	 * @todo    [next] (dev) get all rates at once (for "saved rates")
 	 */
 	function alg_cer_fixer_get_exchange_rate( $currency_from, $currency_to ) {
 		$eur_currency_from = 1;

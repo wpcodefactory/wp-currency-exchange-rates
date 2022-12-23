@@ -4,10 +4,11 @@
  *
  * @version 1.1.0
  * @since   1.0.0
+ *
  * @author  Algoritmika Ltd.
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
 add_shortcode( 'alg_cer_get_exchange_rate',       'alg_cer_get_exchange_rate_shortcode' );
 add_shortcode( 'alg_cer_get_saved_exchange_rate', 'alg_cer_get_saved_exchange_rate_shortcode' );

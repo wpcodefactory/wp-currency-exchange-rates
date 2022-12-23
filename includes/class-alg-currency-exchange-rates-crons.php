@@ -4,10 +4,11 @@
  *
  * @version 1.1.0
  * @since   1.0.0
+ *
  * @author  Algoritmika Ltd.
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Alg_Currency_Exchange_Rates_Crons' ) ) :
 
@@ -18,8 +19,9 @@ class Alg_Currency_Exchange_Rates_Crons {
 	 *
 	 * @version 1.0.0
 	 * @since   1.0.0
-	 * @todo    [dev] (maybe) remove `schedule_the_events` on `admin_init`
-	 * @todo    [dev] `wp_unschedule_event` on plugin deactivation
+	 *
+	 * @todo    [next] (dev) `wp_unschedule_event` on plugin deactivation
+	 * @todo    [maybe] (dev) remove `schedule_the_events` on `admin_init`
 	 */
 	function __construct() {
 		add_action( 'init',                          array( $this, 'schedule_the_events' ) );
@@ -74,6 +76,7 @@ class Alg_Currency_Exchange_Rates_Crons {
 			}
 		}
 		update_option( 'alg_cer_rates', $rates );
+
 	}
 
 }

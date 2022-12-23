@@ -4,10 +4,11 @@
  *
  * @version 1.0.0
  * @since   1.0.0
+ *
  * @author  Algoritmika Ltd.
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Alg_Currency_Exchange_Rates_Core' ) ) :
 
