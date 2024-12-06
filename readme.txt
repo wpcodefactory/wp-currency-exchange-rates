@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, algoritmika, anbinder
 Tags: currency exchange rates, currency, exchange rates
 Requires at least: 4.4
-Tested up to: 6.1
-Stable tag: 1.2.0
+Tested up to: 6.7
+Stable tag: 1.3.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -34,8 +34,17 @@ Exchange rates are updated via [Fixer.io API](https://fixer.io/terms). Please no
 
 == Changelog ==
 
+= 1.3.0 - 06/12/2024 =
+* Dev - Security - Output escaped.
+* Dev - Security - Input sanitized.
+* Dev - Security - Nonces added.
+* Dev - Code refactoring.
+* Dev - Coding standards improved.
+* Dev - Developers - `alg_cer_currencies` filter added.
+* Tested up to: 6.7.
+
 = 1.2.0 - 23/12/2022 =
-* Fix - Admin "Update rates now" button message fixed.
+* Fix - Admin "Update rates now" button notice fixed.
 * Dev - Localisation - `load_plugin_textdomain()` function moved to the `init` action.
 * Dev - Plugin is initialized on `plugins_loaded` now.
 * Dev - Code refactoring.

@@ -2,13 +2,13 @@
 /**
  * Currency Exchange Rates - WP Widget
  *
- * @version 1.1.0
+ * @version 1.3.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Alg_Currency_Exchange_Rates_WP_Widget' ) ) :
 
@@ -31,7 +31,7 @@ class Alg_Currency_Exchange_Rates_WP_Widget extends WP_Widget {
 	/**
 	 * Outputs the content of the widget.
 	 *
-	 * @version 1.1.0
+	 * @version 1.3.0
 	 * @since   1.0.0
 	 *
 	 * @param   array $args
@@ -55,7 +55,8 @@ class Alg_Currency_Exchange_Rates_WP_Widget extends WP_Widget {
 			}
 		}
 		$html .= $args['after_widget'];
-		echo $html;
+		// Output
+		echo wp_kses_post( $html );
 	}
 
 	/**
@@ -75,6 +76,7 @@ class Alg_Currency_Exchange_Rates_WP_Widget extends WP_Widget {
 			),
 			'pairs' => array(
 				'title'   => __( 'Currency pairs (comma separated list)', 'wp-currency-exchange-rates' ) . '<br>' .
+					/* Translators: %s: Currency pair examples. */
 					sprintf( __( 'E.g.: %s', 'wp-currency-exchange-rates' ), '<code>EURUSD,EURGBP,USDGBP</code>' ),
 				'default' => '',
 			),
@@ -93,7 +95,7 @@ class Alg_Currency_Exchange_Rates_WP_Widget extends WP_Widget {
 	/**
 	 * Outputs the options form on admin.
 	 *
-	 * @version 1.0.0
+	 * @version 1.3.0
 	 * @since   1.0.0
 	 *
 	 * @param   array $instance The widget options
@@ -121,7 +123,17 @@ class Alg_Currency_Exchange_Rates_WP_Widget extends WP_Widget {
 			}
 			$html .= '<p>' . $label . $field . '</p>';
 		}
-		echo $html;
+		// Output
+		$tags = array(
+			'p'      => array(),
+			'label'  => array( 'for' => true ),
+			'input'  => array( 'class' => true, 'id' => true, 'name' => true, 'type' => true, 'value' => true ),
+			'br'     => array(),
+			'code'   => array(),
+			'select' => array( 'class' => true, 'id' => true, 'name' => true ),
+			'option' => array( 'value' => true, 'selected' => true ),
+		);
+		echo wp_kses( $html, $tags );
 	}
 
 	/**

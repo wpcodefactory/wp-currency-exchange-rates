@@ -1,90 +1,95 @@
 #: includes/class-alg-currency-exchange-rates-admin-settings.php:36
 #: includes/class-alg-currency-exchange-rates-admin-settings.php:37
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:321
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:385
 #: includes/class-alg-currency-exchange-rates-widget.php:28
 msgid "Currency Exchange Rates"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:122
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:123
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:150
+msgid "Invalid nonce."
+msgstr ""
+
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:181
 msgid "Your settings have been saved."
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:133
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:192
 msgid "Rates have been deleted."
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:144
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:203
 msgid "Rates have been updated."
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:156
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:216
 #, php-format
 msgid "Get your free API key from %s."
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:170
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:230
 msgid "Exchange rates server"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:178
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:238
 msgid "API key"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:186
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:246
 msgid "Update period"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:191
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:251
 msgid "Update hourly"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:192
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:252
 msgid "Update twice daily"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:193
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:253
 msgid "Update daily"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:231
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:291
 msgid "Save changes"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:248
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:310
 msgid "Delete saved rates"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:250
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:312
 msgid "Update rates now"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:265
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:328
 msgid "Pair"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:265
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:328
 msgid "Rate"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:277
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:339
 msgid "No saved rates yet."
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:293
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:356
 #, php-format
-msgid "Next update scheduled at %s (in %s)."
+msgid "Next update scheduled at %1$s (in %2$s)."
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:302
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:366
 #, php-format
-msgid "Last update at %s (%s ago) from %s server."
+msgid "Last update at %1$s (%2$s ago) from %3$s server."
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:322
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:386
 msgid "Options"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-admin-settings.php:324
+#: includes/class-alg-currency-exchange-rates-admin-settings.php:388
 msgid "Saved Rates"
 msgstr ""
 
@@ -92,28 +97,28 @@ msgstr ""
 msgid "Add currency exchange rates table to your site."
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-widget.php:73
+#: includes/class-alg-currency-exchange-rates-widget.php:74
 msgid "Title"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-widget.php:77
+#: includes/class-alg-currency-exchange-rates-widget.php:78
 msgid "Currency pairs (comma separated list)"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-widget.php:78
+#: includes/class-alg-currency-exchange-rates-widget.php:80
 #, php-format
 msgid "E.g.: %s"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-widget.php:82
+#: includes/class-alg-currency-exchange-rates-widget.php:84
 msgid "Use saved rates"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-widget.php:86
+#: includes/class-alg-currency-exchange-rates-widget.php:88
 msgid "No"
 msgstr ""
 
-#: includes/class-alg-currency-exchange-rates-widget.php:87
+#: includes/class-alg-currency-exchange-rates-widget.php:89
 msgid "Yes"
 msgstr ""
 

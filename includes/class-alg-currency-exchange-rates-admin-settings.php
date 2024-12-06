@@ -2,7 +2,7 @@
 /**
  * Currency Exchange Rates - Admin Settings Class
  *
- * @version 1.2.0
+ * @version 1.3.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -44,7 +44,7 @@ class Alg_Currency_Exchange_Rates_Admin_Settings {
 	/**
 	 * get_table_html.
 	 *
-	 * @version 1.0.0
+	 * @version 1.3.0
 	 * @since   1.0.0
 	 */
 	function get_table_html( $data, $args = array() ) {
@@ -57,20 +57,39 @@ class Alg_Currency_Exchange_Rates_Admin_Settings {
 			'columns_styles'     => array(),
 		);
 		$args = array_merge( $defaults, $args );
-		extract( $args );
-		$table_class = ( '' == $table_class ) ? '' : ' class="' . $table_class . '"';
-		$table_style = ( '' == $table_style ) ? '' : ' style="' . $table_style . '"';
-		$row_styles  = ( '' == $row_styles )  ? '' : ' style="' . $row_styles  . '"';
+		$table_class = ( '' == $args['table_class'] ) ? '' : ' class="' . $args['table_class'] . '"';
+		$table_style = ( '' == $args['table_style'] ) ? '' : ' style="' . $args['table_style'] . '"';
+		$row_styles  = ( '' == $args['row_styles'] )  ? '' : ' style="' . $args['row_styles']  . '"';
 		$html = '';
 		$html .= '<table' . $table_class . $table_style . '>';
 		$html .= '<tbody>';
 		foreach( $data as $row_number => $row ) {
 			$html .= '<tr' . $row_styles . '>';
 			foreach( $row as $column_number => $value ) {
-				$th_or_td = ( ( 0 === $row_number && 'horizontal' === $table_heading_type ) || ( 0 === $column_number && 'vertical' === $table_heading_type ) ) ? 'th' : 'td';
-				$column_class = ( ! empty( $columns_classes ) && isset( $columns_classes[ $column_number ] ) ) ? ' class="' . $columns_classes[ $column_number ] . '"' : '';
-				$column_style = ( ! empty( $columns_styles ) && isset( $columns_styles[ $column_number ] ) ) ? ' style="' . $columns_styles[ $column_number ] . '"' : '';
-
+				$th_or_td = (
+					(
+						( 0 === $row_number    && 'horizontal' === $args['table_heading_type'] ) ||
+						( 0 === $column_number && 'vertical'   === $args['table_heading_type'] )
+					) ?
+					'th' :
+					'td'
+				);
+				$column_class = (
+					(
+						! empty( $args['columns_classes'] ) &&
+						isset( $args['columns_classes'][ $column_number ] )
+					) ?
+					' class="' . $args['columns_classes'][ $column_number ] . '"' :
+					''
+				);
+				$column_style = (
+					(
+						! empty( $args['columns_styles'] ) &&
+						isset( $args['columns_styles'][ $column_number ] )
+					) ?
+					' style="' . $args['columns_styles'][ $column_number ] . '"' :
+					''
+				);
 				$html .= '<' . $th_or_td . $column_class . $column_style . '>';
 				$html .= $value;
 				$html .= '</' . $th_or_td . '>';
@@ -85,63 +104,103 @@ class Alg_Currency_Exchange_Rates_Admin_Settings {
 	/**
 	 * handle_actions.
 	 *
-	 * @version 1.2.0
+	 * @version 1.3.0
 	 * @since   1.0.0
 	 */
 	function handle_actions() {
+
+		// Save changes
 		if ( isset( $_POST['alg_cer_save_options'] ) ) {
+
+			// Check nonce
+			if (
+				! isset( $_POST['_alg_cer_nonce'] ) ||
+				! wp_verify_nonce(
+					sanitize_text_field( wp_unslash( $_POST['_alg_cer_nonce'] ) ),
+					'alg_cer_save_options'
+				)
+			) {
+				wp_die( esc_html__( 'Invalid nonce.', 'wp-currency-exchange-rates' ) );
+			}
+
+			// Save
 			foreach ( $this->get_options() as $option ) {
 				if ( isset( $_POST[ $option['id'] ] ) ) {
-					update_option( $option['id'], $_POST[ $option['id'] ] );
+					update_option( $option['id'], sanitize_text_field( wp_unslash( $_POST[ $option['id'] ] ) ) );
 				}
 			}
 			add_action( 'admin_notices', array( $this, 'admin_notice_options_saved' ) );
+
 		}
-		if ( isset( $_POST['alg_cer_delete_rates'] ) ) {
-			delete_option( 'alg_cer_rates' );
-			$cron_data = get_option( 'alg_cer_cron_data', array() );
-			unset( $cron_data['last_run'] );
-			unset( $cron_data['server'] );
-			update_option( 'alg_cer_cron_data', $cron_data );
-			add_action( 'admin_notices', array( $this, 'admin_notice_rates_deleted' ) );
+
+		// Delete saved rates / Update rates now
+		if (
+			isset( $_POST['alg_cer_delete_rates'] ) ||
+			isset( $_POST['alg_cer_update_rates'] )
+		) {
+
+			// Check nonce
+			if (
+				! isset( $_POST['_alg_cer_nonce'] ) ||
+				! wp_verify_nonce(
+					sanitize_text_field( wp_unslash( $_POST['_alg_cer_nonce'] ) ),
+					'alg_cer_update_delete_rates'
+				)
+			) {
+				wp_die( esc_html__( 'Invalid nonce.', 'wp-currency-exchange-rates' ) );
+			}
+
+			// Delete saved rates
+			if ( isset( $_POST['alg_cer_delete_rates'] ) ) {
+				delete_option( 'alg_cer_rates' );
+				$cron_data = get_option( 'alg_cer_cron_data', array() );
+				unset( $cron_data['last_run'] );
+				unset( $cron_data['server'] );
+				update_option( 'alg_cer_cron_data', $cron_data );
+				add_action( 'admin_notices', array( $this, 'admin_notice_rates_deleted' ) );
+			}
+
+			// Update rates now
+			if ( isset( $_POST['alg_cer_update_rates'] ) ) {
+				do_action( 'alg_cer_update_exchange_rates' );
+				add_action( 'admin_notices', array( $this, 'admin_notice_rates_updated' ) );
+			}
+
 		}
-		if ( isset( $_POST['alg_cer_update_rates'] ) ) {
-			do_action( 'alg_cer_update_exchange_rates' );
-			add_action( 'admin_notices', array( $this, 'admin_notice_rates_updated' ) );
-		}
+
 	}
 
 	/**
 	 * admin_notice_options_saved.
 	 *
-	 * @version 1.0.0
+	 * @version 1.3.0
 	 * @since   1.0.0
 	 */
 	function admin_notice_options_saved() {
 		echo '<div class="notice notice-success is-dismissible">' .
-			'<p>' . '<strong>' . __( 'Your settings have been saved.', 'wp-currency-exchange-rates' ) . '</strong>' . '</p>' . '</div>';
+			'<p>' . '<strong>' . esc_html__( 'Your settings have been saved.', 'wp-currency-exchange-rates' ) . '</strong>' . '</p>' . '</div>';
 	}
 
 	/**
 	 * admin_notice_rates_deleted.
 	 *
-	 * @version 1.0.0
+	 * @version 1.3.0
 	 * @since   1.0.0
 	 */
 	function admin_notice_rates_deleted() {
 		echo '<div class="notice notice-success is-dismissible">' .
-			'<p>' . '<strong>' . __( 'Rates have been deleted.', 'wp-currency-exchange-rates' ) . '</strong>' . '</p>' . '</div>';
+			'<p>' . '<strong>' . esc_html__( 'Rates have been deleted.', 'wp-currency-exchange-rates' ) . '</strong>' . '</p>' . '</div>';
 	}
 
 	/**
 	 * admin_notice_rates_updated
 	 *
-	 * @version 1.0.0
+	 * @version 1.3.0
 	 * @since   1.0.0
 	 */
 	function admin_notice_rates_updated() {
 		echo '<div class="notice notice-success is-dismissible">' .
-			'<p>' . '<strong>' . __( 'Rates have been updated.', 'wp-currency-exchange-rates' ) . '</strong>' . '</p>' . '</div>';
+			'<p>' . '<strong>' . esc_html__( 'Rates have been updated.', 'wp-currency-exchange-rates' ) . '</strong>' . '</p>' . '</div>';
 	}
 
 	/**
@@ -153,6 +212,7 @@ class Alg_Currency_Exchange_Rates_Admin_Settings {
 	function get_api_key_desc( $server ) {
 		switch ( $server ) {
 			default: // 'fixer'
+				/* Translators: %s: Site link. */
 				return sprintf( __( 'Get your free API key from %s.', 'wp-currency-exchange-rates' ),
 					'<a target="_blank" href="https://fixer.io/product">Fixer.io</a>' );
 		}
@@ -200,7 +260,7 @@ class Alg_Currency_Exchange_Rates_Admin_Settings {
 	/**
 	 * get_options_table.
 	 *
-	 * @version 1.1.0
+	 * @version 1.3.0
 	 * @since   1.0.0
 	 */
 	function get_options_table() {
@@ -232,13 +292,15 @@ class Alg_Currency_Exchange_Rates_Admin_Settings {
 			''
 		);
 		return '<form method="post" action="">' .
-			$this->get_table_html( $table_data, array( 'table_class' => 'widefat striped', 'table_heading_type' => 'vertical' ) ) . '</form>';
+			$this->get_table_html( $table_data, array( 'table_class' => 'widefat striped', 'table_heading_type' => 'vertical' ) ) .
+			wp_nonce_field( 'alg_cer_save_options', '_alg_cer_nonce', true, false ) .
+		'</form>';
 	}
 
 	/**
 	 * get_rates_actions_form.
 	 *
-	 * @version 1.0.0
+	 * @version 1.3.0
 	 * @since   1.0.0
 	 */
 	function get_rates_actions_form( $add_delete_button ) {
@@ -249,13 +311,14 @@ class Alg_Currency_Exchange_Rates_Admin_Settings {
 				'<input type="submit" name="alg_cer_update_rates" class="button-primary" value="' .
 					__( 'Update rates now', 'wp-currency-exchange-rates' ) . '">' .
 			'</p>' .
+			wp_nonce_field( 'alg_cer_update_delete_rates', '_alg_cer_nonce', true, false ) .
 		'</form>';
 	}
 
 	/**
 	 * get_rates_table.
 	 *
-	 * @version 1.0.0
+	 * @version 1.3.0
 	 * @since   1.0.0
 	 */
 	function get_rates_table() {
@@ -271,7 +334,6 @@ class Alg_Currency_Exchange_Rates_Admin_Settings {
 			}
 			return $this->get_rates_actions_form( true ) .
 				$this->get_table_html( $table_data, array( 'table_class' => 'widefat striped' ) );
-				$html;
 		} else {
 			return $this->get_rates_actions_form( false ) .
 				'<p style="font-style:italic;">' . __( 'No saved rates yet.', 'wp-currency-exchange-rates' ) . '</p>';
@@ -281,7 +343,7 @@ class Alg_Currency_Exchange_Rates_Admin_Settings {
 	/**
 	 * get_cron_data.
 	 *
-	 * @version 1.0.0
+	 * @version 1.3.0
 	 * @since   1.0.0
 	 */
 	function get_cron_data() {
@@ -290,7 +352,8 @@ class Alg_Currency_Exchange_Rates_Admin_Settings {
 		if ( ! empty( $cron_data ) ) {
 			if ( isset( $cron_data['next_scheduled'] ) && '' != $cron_data['next_scheduled'] ) {
 				$html .= '<p style="font-style:italic;">' . sprintf(
-					__( 'Next update scheduled at %s (in %s).', 'wp-currency-exchange-rates' ),
+					/* Translators: %1$s: Date, %2$s: Time difference. */
+					__( 'Next update scheduled at %1$s (in %2$s).', 'wp-currency-exchange-rates' ),
 						'<code>' . date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $cron_data['next_scheduled'] ) . '</code>',
 						'<code>' . human_time_diff( $cron_data['next_scheduled'] ) . '</code>'
 				) . '</p>';
@@ -299,7 +362,8 @@ class Alg_Currency_Exchange_Rates_Admin_Settings {
 				$servers = alg_cer_get_currency_exchange_rate_servers();
 				$server  = ( isset( $servers[ $cron_data['server'] ] ) ? $servers[ $cron_data['server'] ] : $cron_data['server'] );
 				$html .= '<p style="font-style:italic;">' . sprintf(
-					__( 'Last update at %s (%s ago) from %s server.', 'wp-currency-exchange-rates' ),
+					/* Translators: %1$s: Date, %2$s: Time difference, %3$s: Server name. */
+					__( 'Last update at %1$s (%2$s ago) from %3$s server.', 'wp-currency-exchange-rates' ),
 						'<code>' . date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $cron_data['last_run'] ) . '</code>',
 						'<code>' . human_time_diff( $cron_data['last_run'] ) . '</code>',
 						'<code>' . $server . '</code>'
@@ -312,7 +376,7 @@ class Alg_Currency_Exchange_Rates_Admin_Settings {
 	/**
 	 * output_admin_menu.
 	 *
-	 * @version 1.0.0
+	 * @version 1.3.0
 	 * @since   1.0.0
 	 */
 	function output_admin_menu() {
@@ -325,7 +389,26 @@ class Alg_Currency_Exchange_Rates_Admin_Settings {
 		$html .= $this->get_cron_data();
 		$html .= $this->get_rates_table();
 		$html .= '</div>';
-		echo $html;
+		// Output
+		$tags = array(
+			'div'    => array( 'class' => true ),
+			'h1'     => array(),
+			'h2'     => array(),
+			'form'   => array( 'method' => true, 'action' => true ),
+			'table'  => array( 'class' => true ),
+			'tbody'  => array(),
+			'tr'     => array(),
+			'th'     => array(),
+			'td'     => array(),
+			'select' => array( 'name' => true, 'class' => true ),
+			'option' => array( 'value' => true, 'selected' => true ),
+			'input'  => array( 'name' => true, 'type' => true, 'id' => true, 'class' => true, 'value' => true ),
+			'p'      => array( 'style' => true ),
+			'em'     => array(),
+			'a'      => array( 'target' => true, 'href' => true ),
+			'code'   => array(),
+		);
+		echo wp_kses( $html, $tags );
 	}
 
 }

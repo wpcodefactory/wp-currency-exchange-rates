@@ -3,16 +3,18 @@
 Plugin Name: WP Currency Exchange Rates
 Plugin URI: https://wpfactory.com/
 Description: Currency exchange rates for WordPress.
-Version: 1.2.0
+Version: 1.3.0
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: wp-currency-exchange-rates
 Domain Path: /langs
+License: GNU General Public License v3.0
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-defined( 'ALG_WP_CURRENCY_EXCHANGE_RATES_VERSION' ) || define( 'ALG_WP_CURRENCY_EXCHANGE_RATES_VERSION', '1.2.0' );
+defined( 'ALG_WP_CURRENCY_EXCHANGE_RATES_VERSION' ) || define( 'ALG_WP_CURRENCY_EXCHANGE_RATES_VERSION', '1.3.0' );
 
 defined( 'ALG_WP_CURRENCY_EXCHANGE_RATES_FILE' ) || define( 'ALG_WP_CURRENCY_EXCHANGE_RATES_FILE', __FILE__ );
 

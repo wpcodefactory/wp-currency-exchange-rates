@@ -2,7 +2,7 @@
 /**
  * Currency Exchange Rates - Crons Class
  *
- * @version 1.1.0
+ * @version 1.3.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -57,7 +57,7 @@ class Alg_Currency_Exchange_Rates_Crons {
 	/**
 	 * update_exchange_rates.
 	 *
-	 * @version 1.1.0
+	 * @version 1.3.0
 	 * @since   1.0.0
 	 */
 	function update_exchange_rates( $interval ) {
@@ -68,7 +68,7 @@ class Alg_Currency_Exchange_Rates_Crons {
 		update_option( 'alg_cer_cron_data', $cron_data );
 
 		$base_currency = get_woocommerce_currency();
-		$currencies    = get_woocommerce_currencies();
+		$currencies    = apply_filters( 'alg_cer_currencies', get_woocommerce_currencies() );
 		$rates         = get_option( 'alg_cer_rates', array() );
 		foreach ( $currencies as $currency_code => $currency_name ) {
 			if ( false !== ( $rate = alg_cer_get_exchange_rate( $base_currency, $currency_code ) ) ) {
