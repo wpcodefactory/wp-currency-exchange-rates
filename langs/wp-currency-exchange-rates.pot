@@ -1,3 +1,44 @@
+# Copyright (C) 2025 WPFactory
+# This file is distributed under the GNU General Public License v3.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: wp-currency-exchange-rates 1.3.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-currency-exchange-rates\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-09-04T15:25:17+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: wp-currency-exchange-rates\n"
+
+#. Plugin Name of the plugin
+#: wp-currency-exchange-rates.php
+msgid "WP Currency Exchange Rates"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: wp-currency-exchange-rates.php
+msgid "https://wpfactory.com/"
+msgstr ""
+
+#. Description of the plugin
+#: wp-currency-exchange-rates.php
+msgid "Currency exchange rates for WordPress."
+msgstr ""
+
+#. Author of the plugin
+#: wp-currency-exchange-rates.php
+msgid "WPFactory"
+msgstr ""
+
+#. Author URI of the plugin
+#: wp-currency-exchange-rates.php
+msgid "https://wpfactory.com"
+msgstr ""
+
 #: includes/class-alg-currency-exchange-rates-admin-settings.php:36
 #: includes/class-alg-currency-exchange-rates-admin-settings.php:37
 #: includes/class-alg-currency-exchange-rates-admin-settings.php:385
@@ -22,6 +63,7 @@ msgstr ""
 msgid "Rates have been updated."
 msgstr ""
 
+#. Translators: %s: Site link.
 #: includes/class-alg-currency-exchange-rates-admin-settings.php:216
 #, php-format
 msgid "Get your free API key from %s."
@@ -75,11 +117,13 @@ msgstr ""
 msgid "No saved rates yet."
 msgstr ""
 
+#. Translators: %1$s: Date, %2$s: Time difference.
 #: includes/class-alg-currency-exchange-rates-admin-settings.php:356
 #, php-format
 msgid "Next update scheduled at %1$s (in %2$s)."
 msgstr ""
 
+#. Translators: %1$s: Date, %2$s: Time difference, %3$s: Server name.
 #: includes/class-alg-currency-exchange-rates-admin-settings.php:366
 #, php-format
 msgid "Last update at %1$s (%2$s ago) from %3$s server."
@@ -105,6 +149,7 @@ msgstr ""
 msgid "Currency pairs (comma separated list)"
 msgstr ""
 
+#. Translators: %s: Currency pair examples.
 #: includes/class-alg-currency-exchange-rates-widget.php:80
 #, php-format
 msgid "E.g.: %s"
